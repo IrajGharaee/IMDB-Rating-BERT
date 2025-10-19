@@ -1,2 +1,32 @@
-# IMDB-Rating-BERT
-Using distilbert model to predict the rating by reading the given comment. 
+#  IMDB Movie Rating Predictor using DistilBERT
+
+## Overview
+This project implements a **text regression model** using **DistilBERT** to predict a movie’s **numerical rating (1–10)** based on its user review text.  
+Unlike traditional sentiment analysis that only classifies a review as positive or negative, this project performs **fine-grained rating prediction** — capturing subtle emotional and contextual signals in language.
+
+---
+
+## Key Features
+- Built using **Hugging Face Transformers** and **DistilBERT**, a lightweight and efficient version of BERT.  
+- Predicts **continuous IMDB ratings (1–10)** instead of binary sentiment.  
+- Fine-tuned on the **IMDB review dataset**, with the rating as the regression target.  
+- Uses **PyTorch** backend for training and evaluation.  
+- Includes preprocessing steps like text cleaning, tokenization, and sequence padding.  
+
+---
+
+## Methodology
+1. **Data Preparation**
+   - Collected IMDB reviews with corresponding user ratings (1–10).
+   - Cleaned and preprocessed the text (lowercasing, removing special characters, etc.).
+
+2. **Model Architecture**
+   - Base model: `distilbert-base-uncased`
+   - Added a **regression head** on top of the `[CLS]` token output to predict a single rating value.
+
+3. **Training Setup**
+   ```python
+   from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
+   model = DistilBertForSequenceClassification.from_pretrained(
+       "distilbert-base-uncased", num_labels=1
+   )
