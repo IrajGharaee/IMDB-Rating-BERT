@@ -14,19 +14,3 @@ Unlike traditional sentiment analysis that only classifies a review as positive 
 - Includes preprocessing steps like text cleaning, tokenization, and sequence padding.  
 
 ---
-
-## Methodology
-1. **Data Preparation**
-   - Collected IMDB reviews with corresponding user ratings (1–10).
-   - Cleaned and preprocessed the text (lowercasing, removing special characters, etc.).
-
-2. **Model Architecture**
-   - Base model: `distilbert-base-uncased`
-   - Added a **regression head** on top of the `[CLS]` token output to predict a single rating value.
-
-3. **Training Setup**
-   ```python
-   from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
-   model = DistilBertForSequenceClassification.from_pretrained(
-       "distilbert-base-uncased", num_labels=1
-   )
